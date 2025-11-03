@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DeepFake Detection</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Imagedetection/css/style.css' %}">
+</head>
+<body>
+    <h1>Welcome to DeepFake Image Detection</h1>
+    <p>Upload an image to check if it's real or AI-generated.</p>
+    <a href="{% url 'upload_image' %}" class="btn">Go to Upload</a>
+</body>
+</html>
