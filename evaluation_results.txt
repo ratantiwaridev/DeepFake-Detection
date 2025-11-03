@@ -1,0 +1,10 @@
+Test Accuracy: 83.90%
+Test Loss: 0.3581
+              precision    recall  f1-score   support
+
+        Fake       0.81      0.89      0.85      6000
+        Real       0.88      0.79      0.83      5997
+
+    accuracy                           0.84     11997
+   macro avg       0.84      0.84      0.84     11997
+weighted avg       0.84      0.84      0.84     11997
