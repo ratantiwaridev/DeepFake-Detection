@@ -1,42 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DeepFake - File Upload</title>
-    
     {% load static %}
-    <link rel="stylesheet" href="{% static 'ImageDetection/css/style.css' %}">
-
-</head>
-<body>
+    <link rel="stylesheet" href="{% static 'imagedetection/css/style.css' %}" />
+  </head>
+  <body>
     <div class="container">
-        <nav class="left-nav">
-            <h1 class="app-name">DeepFake</h1>
-            <ul>
-                <li><a href="#">Contribute Image</a></li>
-                <li><a href="#">Contribute Video</a></li>
-            </ul>
+      <nav class="left-nav">
+        <h1 class="app-name">DeepFake</h1>
+        <ul>
+          <li><a href="#">Contribute Image</a></li>
+          <li><a href="#">Contribute Video</a></li>
+        </ul>
+      </nav>
+
+      <div class="main-content">
+        <nav class="top-nav">
+          <ul>
+            <li><a href="#">Image Upload</a></li>
+            <li><a href="#">Video Upload</a></li>
+            <li><a href="#">Audio Upload</a></li>
+          </ul>
         </nav>
 
-        <div class="main-content">
-            <nav class="top-nav">
-                <ul>
-                    <li><a href="#">Image Upload</a></li>
-                    <li><a href="#">Video Upload</a></li>
-                    <li><a href="#">Audio Upload</a></li>
-                </ul>
-            </nav>
-
-            <div class="drag-drop-container">
-                <div class="drag-drop-box">
-                    <span class="upload-icon">&#x2191;</span> <p>Drag and drop files here</p>
-                    <p>or</p>
-                    <input type="file" id="file-input" multiple>
-                    <label for="file-input" class="file-label">Select Files</label>
-                </div>
-            </div>
+        <div class="drag-drop-container">
+          <div class="drag-drop-box" id="drop-area">
+            <span class="upload-icon">&#x2191;</span>
+            <p>Drag and drop image here</p>
+            <p>or</p>
+            <form id="upload-form" enctype="multipart/form-data">
+              {% csrf_token %}
+              <input
+                type="file"
+                id="file-input"
+                name="image"
+                accept="image/*"
+                required
+              />
+              <label for="file-input" class="file-label">Select Image</label>
+            </form>
+          </div>
+          <div id="preview-area" style="display: none">
+            <img id="preview-img" src="" width="300" alt="Preview" /><br />
+            <h3 id="result-text"></h3>
+          </div>
         </div>
+      </div>
     </div>
-</body>
+
+    <script src="{% static 'Imagedetection/js/upload.js' %}"></script>
+  </body>
 </html>

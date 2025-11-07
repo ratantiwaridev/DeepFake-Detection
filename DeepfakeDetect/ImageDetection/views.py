@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -10,18 +11,16 @@ def home(request):
 def index(request):
     return render(request, 'Imagedetection/index.html')
 
-def upload_image(request):
-    if request.method == 'POST' and request.FILES['image']:
+def upload_image_ajax(request):
+    if request.method == 'POST' and request.FILES.get('image'):
         image = request.FILES['image']
         fs = FileSystemStorage()
         filename = fs.save(image.name, image)
-        uploaded_file_url = fs.url(filename)
+        file_url = fs.url(filename)
 
-        # You’ll later call your CNN model here to classify fake/real
-        result = "Prediction pending"  
+        # TODO: Replace with model prediction
+        result = "Prediction Pending (Model Not Connected Yet)"
 
-        return render(request, 'Imagedetection/result.html', {
-            'uploaded_file_url': uploaded_file_url,
-            'result': result
-        })
-    return render(request, 'Imagedetection/upload.html')
+        return JsonResponse({'image_url': file_url, 'result': result})
+
+    return JsonResponse({'error': 'Invalid request'}, status=400)
